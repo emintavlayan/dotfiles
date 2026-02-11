@@ -1,32 +1,12 @@
 -- LEADER --
 
 vim.g.mapleader = " "					-- sets leader key
-vim.g.maplocalleader = ' '
-
--- LAZY.NVIM -------------------------------------------------
-
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup("plugins")
--- ----------------------------------------------------------
 
 -- OPTIONS --
-vim.g.have_nerd_font = false  -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.o.title = true				  	-- show title
-vim.o.syntax = "ON"				  	-- set syntax to ON
+--vim.o.title = true					-- show title
+vim.o.syntax = "ON"					-- set syntax to ON
 vim.o.backup = false					-- turn off backup file
-vim.o.writebackup = false  		-- do not write backup
+vim.o.writebackup = false				-- do not write backup
 vim.o.swapfile = false				-- turn off swapfile
 vim.o.undofile = true					-- set undo file
 vim.o.undodir = vim.fn.expand("~/.local/share/nvim/undodir")
@@ -48,10 +28,11 @@ vim.o.tabstop = 4					  	-- tabs=4spaces
 vim.o.shiftwidth = 4					-- tabs=4spaces
 vim.o.expandtab = true				-- convert tabs to spaces
 vim.o.pumheight = 10					-- number of items in popup menu
+vim.g.mapleader = " "					-- sets leader key
 vim.o.showtabline = 1					-- always show the tab line
 vim.o.laststatus = 2					-- always show statusline
 vim.o.signcolumn = "auto"			--  only use sign column when there is something to put there
-vim.o.colorcolumn = "120"			-- set color column to 120 characters
+vim.o.colorcolumn = "80"			-- set color column to 80 characters
 vim.o.showcmd = true					-- show the command
 vim.o.showmatch = true				-- highlight matching brackets
 vim.o.cmdheight = 1				  	-- set command line height
@@ -132,11 +113,11 @@ vim.keymap.set("n", "<leader>r", ":source ~/.config/nvim/init.lua<CR> \
                                   :source ~/.config/nvim/lua/custom/line-nr.lua<CR> \
                                   :source ~/.config/nvim/lua/custom/netrw.lua<CR>")
 
+-- toggle line wrapping
+vim.keymap.set("n", "<leader>w", ":set wrap!<CR>")
+
 -- toggle search highlights
 vim.keymap.set("n", "<leader>hl", ":set hlsearch!<CR>")		-- toggle search highlights
-
--- set Caps lock to ESC
-vim.keymap.set({ "i", "n", "v", "c" }, "<CapsLock>", "<Esc>", { noremap = true, silent = true })
 
 -- centered navigation
 vim.keymap.set("n", "n", "nzzzv", {desc = "Next search result (centered on screen)"})
@@ -158,20 +139,13 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")						-- control+l switches to right split
 vim.keymap.set("n", "<C-j>", "<C-w>j")						-- control+j switches to bottom split
 vim.keymap.set("n", "<C-k>", "<C-w>k")						-- control+k switches to top split
 
--- file operations
-vim.keymap.set("n", "<leader>w", ":w <CR>")		  -- Space+w saves
-vim.keymap.set("n", "<leader>q", ":q <CR>")			-- Space+q quits
-vim.keymap.set("n", "<leader>wq", ":wq <CR>")	  -- Space+wq save and quit
-vim.keymap.set("n", "<leader>qq", ":q! <CR>")		-- Space+qq quit without save
-
 -- buffer navigation
-vim.keymap.set("n", "<leader>bn", ":bnext <CR>")		  -- Tab goes to next buffer
-vim.keymap.set("n", "<leader>bp", ":bprevious <CR>")	-- Shift+Tab goes to previous buffer
-vim.keymap.set("n", "<leader>bd", ":bd! <CR>")				-- Space+d deletes current buffer
-vim.keymap.set("n", "<leader>bl", ":ls <CR>")		  		-- Space+d lists buffers
+vim.keymap.set("n", "<leader>bn", ":bnext <CR>")				-- Tab goes to next buffer
+vim.keymap.set("n", "<leader>bp", ":bprevious <CR>")			-- Shift+Tab goes to previous buffer
+vim.keymap.set("n", "<leader>bd", ":bd! <CR>")				-- Space+d delets current buffer
 
 -- adjust split sizes easier
-vim.keymap.set("n", "<C-Left>", ":vertical resize -3<CR>")	-- Control+Left resizes vertical split +
+vim.keymap.set("n", "<C-Left>", ":vertical resize -3<CR>")		-- Control+Left resizes vertical split +
 vim.keymap.set("n", "<C-Right>", ":vertical resize +3<CR>")	-- Control+Right resizes vertical split -
 
 -- Easy way to get back to normal mode from home row
@@ -216,9 +190,3 @@ vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv")								-- Move current line up
 -- Move selected blocks around
 vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv")								-- Move current line up
 vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv")								-- Move current line down
-
--- DYNA THINGS ----------------------------------------------
-require("dynafocus").setup_keymaps()
-require("dynaoutline").setup_keymaps()
--- ----------------------------------------------------------
-
