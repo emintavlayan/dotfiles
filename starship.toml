@@ -1,0 +1,29 @@
+add_newline = true
+
+format = """
+$username @ \
+$hostname in \
+$directory \
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break\
+$character"""
+
+# --- Banner line ---
+[directory]
+format = "[$path]($style)"
+style = "bold cyan"
+truncate_to_repo = true
+truncation_length = 3
+
+# --- Prompt identity ---
+[username]
+show_always = true
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "bold green"
+format = "[$hostname]($style)"
