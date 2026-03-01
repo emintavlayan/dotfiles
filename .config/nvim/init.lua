@@ -84,20 +84,26 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 if vim.loader then vim.loader.enable() end
 
 
--- 3. PLUGIN SETUP
+-- 3 Lazy SETUP
 require("lazy").setup({
-  -- THEME: Catppuccin (Pre-compiled for speed)
+
+  -- THEME NightFox but CarbonFox
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "EdenEast/nightfox.nvim",
     priority = 1000,
     config = function()
-      require("catppuccin").setup({
-        flavour = "mocha",
-        transparent_background = false,
-        term_colors = true,
+      require("nightfox").setup({
+        options = {
+          transparent = false,
+          styles = { comments = "italic" },
+        }
       })
-      vim.cmd.colorscheme "catppuccin"
+      vim.cmd.colorscheme "carbonfox" -- or nightfox, duskfox, nordfox
+      
+      -- MINIMUM EFFORT: Darken the bars for contrast
+      local colors = require("nightfox.palette").load("carbonfox")
+      vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { bg = colors.sel0.base, fg = colors.blue.base })
+      vim.api.nvim_set_hl(0, "MiniTablineActive", { bg = colors.sel0.base, fg = colors.white.base, bold = true })
     end,
   },
 
