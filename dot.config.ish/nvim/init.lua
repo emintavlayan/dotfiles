@@ -16,9 +16,8 @@ vim.opt.rtp:prepend(lazypath)
 -- 2. BASIC SETTINGS (Performance-focused)
 vim.g.mapleader = " "
 
-vim.o.syntax = "ON"					-- set syntax to ON
 vim.o.backup = false					-- turn off backup file
-vim.o.writebackup = false				-- do not write backup
+vim.o.writebackup = false			-- do not write backup
 vim.o.swapfile = false				-- turn off swapfile
 vim.o.undofile = true					-- set undo file
 vim.o.undodir = vim.fn.expand("~/.local/share/nvim/undodir")
@@ -26,7 +25,6 @@ vim.o.updatetime = 300				-- decrease update time to improve snappiness
 vim.o.cursorline = true				-- set highlighted cursor line
 vim.o.autoread = true		  		-- re-read files in case they were edited outside of vim
 vim.o.autowrite = false				-- do not auto write file when changing buffers and such
-vim.o.compatible = false			-- turn off vi compatibility mode
 vim.o.number = true			  		-- turn on line numbers
 vim.o.relativenumber = true		-- turn on relative line numbers
 vim.o.mouse = 'a'				  		-- enable the mouse in all modes
@@ -59,8 +57,9 @@ vim.o.splitright = true				-- vertical split to the right
 vim.o.termguicolors = true		-- terminal gui colors
 vim.o.cmdwinheight = 10       -- cmd window can only take up this many lines
 
--- automatically highligh yanked text
-local HlGrp = vim.api.nvim_create_augroup('highlighter', {clear = true}),
+-- automatically highlight yanked text
+local HlGrp = vim.api.nvim_create_augroup('highlighter', {clear = true})
+
 vim.api.nvim_create_autocmd('TextYankPost', {
 	desc = 'Highlight when yanking text',
 	group = HlGrp,
@@ -70,14 +69,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- automatically ceate directories when saving files
+local AutoDirGroup = vim.api.nvim_create_augroup("AutoCreateDir", { clear = true })
+
 vim.api.nvim_create_autocmd("BufWritePre", {
-	group = augroup,
-	callback = function()
-		local dir = vim.fn.expand('<afile>:p:h')
-		if vim.fn.isdirectory(dir) == 0 then
-			vim.fn.mkdir(dir, 'p')
-		end
-	end,
+  group = AutoDirGroup,
+  callback = function()
+    local dir = vim.fn.expand('<afile>:p:h')
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.fn.mkdir(dir, 'p')
+    end
+  end,
 })
 
 -- Essential for iSH: cache lua bytecode
