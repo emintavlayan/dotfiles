@@ -1,3 +1,6 @@
+-- Essential for iSH: cache lua bytecode
+if vim.loader then vim.loader.enable() end
+
 -- BOOTSTRAP LAZY.NVIM 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -16,46 +19,46 @@ vim.opt.rtp:prepend(lazypath)
 -- 2. BASIC SETTINGS (Performance-focused)
 vim.g.mapleader = " "
 
-vim.o.backup = false					-- turn off backup file
+vim.o.backup = false				-- turn off backup file
 vim.o.writebackup = false			-- do not write backup
 vim.o.swapfile = false				-- turn off swapfile
-vim.o.undofile = true					-- set undo file
+vim.o.undofile = true				-- set undo file
 vim.o.undodir = vim.fn.expand("~/.local/share/nvim/undodir")
 vim.o.updatetime = 300				-- decrease update time to improve snappiness
 vim.o.cursorline = true				-- set highlighted cursor line
 vim.o.autoread = true		  		-- re-read files in case they were edited outside of vim
 vim.o.autowrite = false				-- do not auto write file when changing buffers and such
 vim.o.number = true			  		-- turn on line numbers
-vim.o.relativenumber = true		-- turn on relative line numbers
-vim.o.mouse = 'a'				  		-- enable the mouse in all modes
+vim.o.relativenumber = true		    -- turn on relative line numbers
+vim.o.mouse = 'a'				  	-- enable the mouse in all modes
 vim.o.ignorecase = true				-- enable case insensitive searching
 vim.o.smartcase = true				-- all searches are case insensitive unless there's a capital letter
 vim.o.smartindent = true			-- smart auto-indenting when starting a new line
 vim.o.hlsearch = false				-- disable all highlighted search results
 vim.o.incsearch = true				-- enable incremental searching
 vim.o.wrap = false				  	-- enable text wrapping
-vim.o.tabstop = 4					  	-- tabs=4spaces
-vim.o.shiftwidth = 4					-- tabs=4spaces
-vim.o.expandtab = true				-- convert tabs to spaces
-vim.o.pumheight = 10					-- number of items in popup menu
-vim.o.showtabline = 1					-- always show the tab line
-vim.o.laststatus = 2					-- always show statusline
+vim.o.tabstop = 4				  	-- tabs=4spaces
+vim.o.shiftwidth = 4				-- tabs=4spaces
+vim.o.expandtab = true			    -- convert tabs to spaces
+vim.o.pumheight = 10				-- number of items in popup menu
+vim.o.showtabline = 1				-- always show the tab line
+vim.o.laststatus = 2				-- always show statusline
 vim.o.signcolumn = "auto"			--  only use sign column when there is something to put there
 vim.o.colorcolumn = "80"			-- set color column to 80 characters
-vim.o.showcmd = true					-- show the command
+vim.o.showcmd = true			    -- show the command
 vim.o.showmatch = true				-- highlight matching brackets
 vim.o.cmdheight = 1				  	-- set command line height
 vim.o.showmode = false				-- do not show the mode since it's already in the status line
 vim.o.scrolloff = 8				  	-- scroll page when cursor is 8 lines from top/bottom
 vim.o.sidescrolloff = 8				-- scroll page when cursor is 8 spaces from left/right
-vim.o.clipboard = "unnamedplus"  -- use the system clipboard
-vim.o.wildmenu = true            -- use the wild menu
-vim.o.wildmode = "longest:full,full"  -- set wile menu options
-vim.o.path = "+=**"                   -- search files recursively
+vim.o.clipboard = "unnamedplus"     -- use the system clipboard
+vim.o.wildmenu = true               -- use the wild menu
+vim.o.wildmode = "longest:full,full"-- set wile menu options
+vim.o.path = "+=**"                 -- search files recursively
 vim.o.splitbelow = true				-- split go below
 vim.o.splitright = true				-- vertical split to the right
-vim.o.termguicolors = true		-- terminal gui colors
-vim.o.cmdwinheight = 10       -- cmd window can only take up this many lines
+vim.o.termguicolors = true  		-- terminal gui colors
+vim.o.cmdwinheight = 10             -- cmd window can only take up this many lines
 
 -- automatically highlight yanked text
 local HlGrp = vim.api.nvim_create_augroup('highlighter', {clear = true})
@@ -81,10 +84,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- Essential for iSH: cache lua bytecode
-if vim.loader then vim.loader.enable() end
-
-
 -- 3 Lazy SETUP
 require("lazy").setup({
 
@@ -101,7 +100,7 @@ require("lazy").setup({
       })
       vim.cmd.colorscheme "carbonfox" -- or nightfox, duskfox, nordfox
       
-      -- MINIMUM EFFORT: Darken the bars for contrast
+      -- Darken the bars for contrast
       local colors = require("nightfox.palette").load("carbonfox")
       vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { bg = colors.sel0.base, fg = colors.blue.base })
       vim.api.nvim_set_hl(0, "MiniTablineActive", { bg = colors.sel0.base, fg = colors.white.base, bold = true })
