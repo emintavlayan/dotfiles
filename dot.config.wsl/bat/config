@@ -1,0 +1,9 @@
+# Use less as pager
+--pager=less
+
+# Theme (pick later if you want)
+--theme=TwoDark
+
+# Do not page for short output
+--paging=auto
+

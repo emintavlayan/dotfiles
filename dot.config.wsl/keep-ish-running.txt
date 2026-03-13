@@ -1,0 +1,6 @@
+-- with this command ipados thinks ish uses your location
+-- and asks if to keep it
+-- say while using the app
+-- thank me later
+cat /dev/location > /dev/null &
+    
